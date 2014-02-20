@@ -45,6 +45,7 @@ describe Contact do
   end
   
   it "作为一个字符串返回联系人的全名称" do
-
+    contact = Contact.new(firstname: 'Jhon', lastname: 'Doe', email: 'jhondoe@example.com')
+    expect(contact.name).to eq 'Jhon Doe'
 	end
 end
