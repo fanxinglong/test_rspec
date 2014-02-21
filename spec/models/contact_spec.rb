@@ -48,4 +48,27 @@ describe Contact do
     contact = Contact.new(firstname: 'Jhon', lastname: 'Doe', email: 'jhondoe@example.com')
     expect(contact.name).to eq 'Jhon Doe'
 	end
+
+  describe "最后的名按字母进行过滤" do
+
+    before :each do
+      @smith = Contact.create(firstname: 'Jhon', lastname: 'Smith', email: 'jsmith@example.com')
+      @jones = Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tjones@example.com')
+      @johnson = Contact.create(firstname: 'Jhon', lastname: 'Jhonson', email: 'jjohnson@example.com')
+
+    end
+
+    context "匹配字母的联系人" do
+      it "包含大写字母J的名" do
+        expect(Contact.by_letter("J")).to eq [@johnson, @jones]
+      end
+    end
+
+    context "不匹配字母的联系人" do
+      it "不包含大写字母J的名" do
+        expect(Contact.by_letter("J")).to_not include @smith
+      end
+    end
+
+  end
 end
